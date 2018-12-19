@@ -6,9 +6,9 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#include "cmake-build-debug/LexerClass.h"
-#include "cmake-build-debug/ParserClass.h"
-#include "cmake-build-debug/symTblClass.h"
+#include "LexerClass.h"
+#include "ParserClass.h"
+#include "symTblClass.h"
 
 
 using namespace std;
@@ -27,12 +27,12 @@ int main () {
                    */
 
     string input2 = "openDataServer 5+3 ,-4 "
-                    "print 5 + 3 "
-                    "print \"done\" "
-                    "var x "
-                    "if x == 5 {var plane print \"inside if \"} "
-                    "x = 3 "
-                    "print plane ";
+                    "print  ( 5+ 3)/ 20 *10 ";
+                    //"print \"done\" "
+                    //"var x "
+                    //"if x == 5 {var plane print \"inside if \"} "
+                    //"x = 3 "
+                    //"print plane ";
     vector<string> take_chunks = LexerClass::Lexer(input2);
 
     try {

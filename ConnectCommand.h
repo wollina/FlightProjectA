@@ -1,0 +1,14 @@
+//
+// Created by eyal on 19/12/18.
+//
+
+#ifndef FLIGHTPROJECTA_CONNECTCOMMAND_H
+#define FLIGHTPROJECTA_CONNECTCOMMAND_H
+
+
+class ConnectCommand {
+
+};
+
+
+#endif //FLIGHTPROJECTA_CONNECTCOMMAND_H

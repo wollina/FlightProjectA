@@ -10,6 +10,9 @@
 #include "assignmentCommand.h"
 #include "printCommand.h"
 #include "OpenServerCommand.h"
+#include "ConnectCommand.h"
+#include "sleepCommand.h"
+#include "loopCommand.h"
 
 
 map<int,string> ParserClass::Precedence = {{0,"+"},{0,"-"},{1,"/"},{1,"*"},{2,"^"}};
@@ -31,9 +34,12 @@ map<string,Command*> ParserClass::Commands;
 void ParserClass::Parser(vector<string> Tokens){
     Commands["var"] = new DefineVarCommand();
     Commands["if"] = new ifCommand();
+    Commands["while"] = new loopCommand();
     Commands["="] = new assignmentCommand();
     Commands["print"] = new printCommand();
     Commands["openDataServer"] = new OpenServerCommand();
+    Commands["connect"] = new ConnectCommand();
+    Commands["sleep"] = new sleepCommand();
     for(int index = 0; index < Tokens.size();) {
         if(isCommand(Tokens.at(index)))
             index += Commands[Tokens.at(index)]->execute(index,Tokens);
@@ -72,6 +78,10 @@ bool ParserClass::isNumber(const string str) {
 bool ParserClass::isQuotation(const string str) { //checks if a expression is a string
     if(str.at(0) == '"' && str.at(str.length()-1) == '"')
         return true;
+    if(str.at(0) == '"' && str.at(str.length()-1) != '"')
+        throw "starts with quoutation mark but doesnt end";
+    if(str.at(0) != '"' && str.at(str.length()-1) == '"')
+        throw "ends with quoutation mark but doesnt starts with one";
     return false;
 }
 

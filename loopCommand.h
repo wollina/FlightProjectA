@@ -7,7 +7,7 @@
 
 #include "ConditionParser.h"
 
-class loopCommand : ConditionParser{
+class loopCommand : public ConditionParser {
     int execute(int index, vector<string> Tokens) override;
     ~loopCommand() override;
 };

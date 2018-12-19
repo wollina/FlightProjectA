@@ -8,7 +8,7 @@
 
 int printCommand::execute(int index, vector<string> Tokens) {
     index++; // from print -> "..."
-    if(ParserClass::isQuotation(Tokens.at(index))){
+    if(ParserClass::isQuotation(Tokens.at(index))){ // checks if its a
         cout << Tokens.at(index).substr(1,Tokens.at(index).length()-2) << endl;
         return 2;
     }else{

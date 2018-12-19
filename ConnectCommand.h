@@ -6,8 +6,13 @@
 #define FLIGHTPROJECTA_CONNECTCOMMAND_H
 
 
-class ConnectCommand {
+#include "Command.h"
 
+class ConnectCommand : public Command {
+public:
+    int execute(int index, vector<string> Tokens) override;
+
+    ~ConnectCommand() override;
 };
 
 

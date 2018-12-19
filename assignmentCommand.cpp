@@ -17,9 +17,11 @@ int assignmentCommand::execute(int index, vector<string> Tokens) {
     if (Tokens.at(index+1) == "bind"){//if its sym = bind ....
         if(Tokens.at(index+2).at(0) == '\"'){//if its sym = bind "..."
             symTblClass::addBinded(Tokens.at(index-1),Tokens.at(index+2));// add new bind to bind table
+            counter += 2;
         }
         else if(symTblClass::isBinded(Tokens.at(index+2))){//if its sym = bind sym
             symTblClass::addBinded(Tokens.at(index-1),symTblClass::getBind(Tokens.at(index+2)));// add new bind to bind table
+            counter += 2;
         }
         else{
             throw "could not bind";

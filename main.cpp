@@ -25,10 +25,23 @@ int main () {
                    " sleep "
                    " 250 }";
                    */
-    string input2 = "if x == 5 {var plane \n}";
+
+    string input2 = "openDataServer 5+3 ,-4 "
+                    "print 5 + 3 "
+                    "print \"done\" "
+                    "var x "
+                    "if x == 5 {var plane print \"inside if \"} "
+                    "x = 3 "
+                    "print plane ";
     vector<string> take_chunks = LexerClass::Lexer(input2);
-    ParserClass::Parser(take_chunks);
-    cout << symTblClass::getVlaue("plane") << endl;
+
+    try {
+        ParserClass::Parser(take_chunks);
+    }catch(char* x){
+        cout << x << endl;
+    }
+
+    //cout << symTblClass::getVlaue("plane") << endl;
     for(auto i : take_chunks){
         cout << i << "|";
     }

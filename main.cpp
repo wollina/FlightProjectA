@@ -6,9 +6,9 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#include "LexerClass.h"
-#include "ParserClass.h"
-#include "symTblClass.h"
+#include "cmake-build-debug/LexerClass.h"
+#include "cmake-build-debug/ParserClass.h"
+#include "cmake-build-debug/symTblClass.h"
 
 
 using namespace std;

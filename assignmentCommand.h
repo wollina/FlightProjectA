@@ -7,7 +7,7 @@
 
 
 #include "Command.h"
-
+#include <string>
 class assignmentCommand : public Command{
 public:
     int execute(int index, vector<string> Tokens) override;

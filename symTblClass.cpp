@@ -6,10 +6,7 @@
 
 map<string,double> symTblClass::symTbl = {};// the symbol table
 map<string,string> symTblClass::bindedSymTbl = {};// binded symbols table
-
-//bool symTblClass::addBinded(const string newbind,) {
-
-//}
+TCPClient symTblClass::client = TCPClient();
 
 //add symbol to the map
 bool symTblClass::addSym(const string newSym) {
@@ -27,6 +24,12 @@ bool symTblClass::addBinded(const string newBinded, const string newBind) {
 
 //method to set the values in the symbol table
 bool symTblClass::setSym(const string symbl, const double newVal) {
+    //if its binded need to send set command
+    double test = -1; //TODO: need to remove
+    if(isBinded(symbl)){
+        string setCommand = "set " + bindedSymTbl[symbl] + " " + to_string(test) + "\r\n\r\n";
+        symTblClass::client.send_data(setCommand);
+    }
     auto it = symTbl.find(symbl);
     if (it != symTbl.end()){
         (*it).second = newVal;

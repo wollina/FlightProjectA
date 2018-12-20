@@ -11,7 +11,6 @@
 class ConnectCommand : public Command {
 public:
     int execute(int index, vector<string> Tokens) override;
-
     ~ConnectCommand() override;
 };
 

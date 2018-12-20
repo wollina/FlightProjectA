@@ -14,7 +14,11 @@ using namespace std;
 
 
 int main () {
-    string input = //"openDataServer 5400 10 connect 127.0.0.1 5402 var "
+    string input = "connect 10.0.2.2 5402 "
+                   "var rudder = bind \"controls/flight/rudder\" "
+                   "rudder = -1"
+                   " print  ( 5+ 3)/ 20 *10";
+            /*"openDataServer 5400 10 connect 127.0.0.1 5402 var "
                    "var breaks = bind \"/controls/flight/speedbrake\" "
                    "var rudder = (h0 – heading)/20 "
                    "test 5 + 35, 4\n"
@@ -26,12 +30,12 @@ int main () {
                    "sleep 250 }"
                     "while 5!= 5{"
                     "openDataServer 5+3 ,-4 "
-                    "print  ( 5+ 3)/ 20 *10 "
+
                     "print \"done\" "
                     "connect 12.0.0.127 (54*100) + 2 "
                     "sleep 12+2+ x "
                     "";
-                    //"if x == 5 {var plane print \"inside if \"} "
+                    *///"if x == 5 {var plane print \"inside if \"} "
                     //"x = 3 "
                     //"print plane ";
     vector<string> take_chunks = LexerClass::Lexer(input);

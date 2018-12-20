@@ -2,8 +2,10 @@
 // Created by eyal on 19/12/18.
 //
 
+#include <sys/socket.h>
 #include "ConnectCommand.h"
 #include "ParserClass.h"
+#include "symTblClass.h"
 
 int ConnectCommand::execute(int index, vector<string> Tokens) {
     index++;
@@ -14,15 +16,9 @@ int ConnectCommand::execute(int index, vector<string> Tokens) {
             throw "not a valid ip";
     }
     vector<string> expression = ParserClass::get1Expression(index,Tokens);
-    cout << "expression length:" << expression.size() << endl;
     counter += expression.size()+1 ;
-    cout << "ip:" << ip << endl;
-    cout << "expression:" << endl;
-    for (auto s : expression){
-        cout << s << "|";
-    }
-    cout << endl;
-    //TODO: need to connect here to server with the 2 expressions
+    symTblClass::client.conn(ip,5402);
+    //TODO: need to change 5402 to the expression after interpetation
     return counter;
 }
 

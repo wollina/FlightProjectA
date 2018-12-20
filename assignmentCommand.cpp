@@ -5,6 +5,7 @@
 #include "assignmentCommand.h"
 #include "symTblClass.h"
 #include "ParserClass.h"
+#include "LexerClass.h"
 
 int assignmentCommand::execute(int index, vector<string> Tokens) {
     int counter = 1;
@@ -16,7 +17,8 @@ int assignmentCommand::execute(int index, vector<string> Tokens) {
     }
     if (Tokens.at(index+1) == "bind"){//if its sym = bind ....
         if(Tokens.at(index+2).at(0) == '\"'){//if its sym = bind "..."
-            symTblClass::addBinded(Tokens.at(index-1),Tokens.at(index+2));// add new bind to bind table
+            string noQoutationMarks = Tokens.at(index+2).substr(1,Tokens.at(index+2).length()-2);
+            symTblClass::addBinded(Tokens.at(index-1),noQoutationMarks);// add new bind to bind table
             counter += 2;
         }
         else if(symTblClass::isBinded(Tokens.at(index+2))){//if its sym = bind sym
@@ -32,8 +34,8 @@ int assignmentCommand::execute(int index, vector<string> Tokens) {
     }else{// if its sym = expression
         expression = ParserClass::get1Expression(index, Tokens);
         counter += expression.size();
-        //TODO: need to turn all to numbers
-        //TODO: need to send to the expressions to get number
+        double num = ParserClass::caculateExpression(expression);
+        symTblClass::setSym(Tokens.at(index-1),num);
     }
 
     return counter;

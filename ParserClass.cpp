@@ -1,8 +1,3 @@
-//
-// Created by eyal on 19/12/18.
-//
-
-
 #include "ParserClass.h"
 #include "symTblClass.h"
 #include "ConditionParser.h"
@@ -15,23 +10,10 @@
 #include "loopCommand.h"
 
 
-map<int,string> ParserClass::Precedence = {{0,"+"},{0,"-"},{1,"/"},{1,"*"},{2,"^"}};
-
-map<string,string> ParserClass::Expressions ={
-        {"+", "Plus"},
-        {"-", "Minus"},
-        {"/", "Div"},
-        {"*", "Mult"},
-        {"^", "Pow"}
-};
-
-//{"bind",bindCommand},
-
-map<string,Command*> ParserClass::Commands;
-
-
 
 void ParserClass::Parser(vector<string> Tokens){
+    //intislizing commands map
+    map<string,Command*> Commands;
     Commands["var"] = new DefineVarCommand();
     Commands["if"] = new ifCommand();
     Commands["while"] = new loopCommand();
@@ -40,6 +22,8 @@ void ParserClass::Parser(vector<string> Tokens){
     Commands["openDataServer"] = new OpenServerCommand();
     Commands["connect"] = new ConnectCommand();
     Commands["sleep"] = new sleepCommand();
+
+    //parsing the input
     for(int index = 0; index < Tokens.size();) {
         if(isCommand(Tokens.at(index)))
             index += Commands[Tokens.at(index)]->execute(index,Tokens);
@@ -49,21 +33,30 @@ void ParserClass::Parser(vector<string> Tokens){
             throw "unknown command";
         }
     }
-    //TODO: need to delete all of the memory assigned
-}
 
-bool ParserClass::isOperator(const string &str) {
-    vector<string> ops = {"+", "-", "/", "*", "^"};
-    for(auto op : ops) {
-        if (str == op)
-            return true;
-    }
-    return false;
+    // deleting all the pointers to the commands
+    delete Commands["var"];
+    delete Commands["if"];
+    delete Commands["while"];
+    delete Commands["="];
+    delete Commands["print"];
+    delete Commands["openDataServer"];
+    delete Commands["connect"];
+    delete Commands["sleep"];
 }
 
 bool ParserClass::isCommand(const string &str) {
+    vector<string> Commands = {"var"
+                               ,"if"
+                               ,"while"
+                               ,"="
+                               ,"print"
+                               ,"openDataServer"
+                               ,"connect"
+                               ,"sleep"};
+
     for(auto com : Commands){
-        if(str == com.first)
+        if(str == com)
             return true;
     }
     return false;
@@ -91,7 +84,7 @@ vector<string> ParserClass::get1Expression(const int index, vector<string>Tokens
     int ind = index;
     ind++;
     vector<string> expression = {};
-    while(ind < Tokens.size() && Tokens.at(ind) != "}" && !isCommand(Tokens.at(ind)) && !symTblClass::isSym(Tokens.at(ind))){
+    while(ind < Tokens.size() && Tokens.at(ind) != "}" && !isCommand(Tokens.at(ind)) && !(symTblClass::isSym(Tokens.at(ind)) && Tokens.at(ind+1) == "=")){
         expression.emplace_back(Tokens.at(ind));
         ind++;
     }
@@ -100,7 +93,16 @@ vector<string> ParserClass::get1Expression(const int index, vector<string>Tokens
 
 
 double ParserClass::caculateExpression(const vector<string> expression) {
-    return 4.0; //TODO: need to fix this method
+    vector<string> onlyNums;
+    //loop  for replaceing the names for values
+    for(int i=0; i<expression.size(); i++){
+        if(symTblClass::isSym(expression.at(i)))
+            onlyNums.emplace_back(to_string(symTblClass::getVlaue(expression.at(i))));
+        else
+            onlyNums.emplace_back(expression.at(i));
+    }
+    //TODO: need to send now to the shuting yard algo and send the value back
+    return 1.0;
 }
 
 int ParserClass::ExpressionLength(int index, vector<string> Tokens) {

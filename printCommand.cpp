@@ -14,12 +14,6 @@ int printCommand::execute(int index, vector<string> Tokens) {
     }else{
         vector<string> expression = ParserClass::get1Expression(index-1,Tokens);
         double print = ParserClass::caculateExpression(expression);
-        cout << "print" << endl;
-        cout << "expression" << endl;
-        for (auto s : expression){
-            cout << s << "|";
-        }
-        cout << endl << print << endl;
         return expression.size()+1;
     }
 

@@ -4,13 +4,23 @@
 
 #include "OpenServerCommand.h"
 #include "ParserClass.h"
+#include "DataReaderServer.h"
+atomic<int> OpenServerCommand::connection_indicator(0);
 
 int OpenServerCommand::execute(int index, vector<string> Tokens) {
     index++; //goes from osc -> expression
+
+    cout << "Please open the simulator" << endl << "Waiting for connection to the simulator..." << endl;
+
     int counter = 1;
+
     vector<string> firstExpression = {};
     vector<string> secondExpression = {};
+
     int firstExpLen = ParserClass::ExpressionLength(index,Tokens);
+
+    // adding t the expression and remving the ',' if there is one
+
     for (int j = 0; j < firstExpLen; j++){
         if(Tokens.at(index) != ",") {
             firstExpression.emplace_back(Tokens.at(index));
@@ -22,17 +32,21 @@ int OpenServerCommand::execute(int index, vector<string> Tokens) {
     secondExpression = ParserClass::get1Expression(index-1,Tokens);
     counter += secondExpression.size();
 
-    //TODO: need to add thread and connecting to the server
+    //TODO: need to send port number and the timing
+
+    DataReaderServer::CreateServerThread(5400, 10);
+
+    //stoping the program untill we know we are connected to the simulator and we got the first values
+    while(OpenServerCommand::connection_indicator.load(memory_order_seq_cst) != 1){
+        sleep(0.5);
+    }
+
+    cout <<endl<< "Connected Successfully" << endl;
+
     //TODO: remove prints
-    cout << "opened server" << endl;
-    cout << "\nfirst" << endl;
-    for (auto s : firstExpression){
-        cout << s << "|" ;
-    }
-    cout << "\nsecond" << endl;
-    for (auto s : secondExpression){
-        cout << s << "|" ;
-    }
+
+    cout << "Opened new server" << endl;
+
     return counter;
 }
 

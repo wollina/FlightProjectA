@@ -28,9 +28,6 @@ int assignmentCommand::execute(int index, vector<string> Tokens) {
         else{
             throw "could not bind";
         }
-    }else if(symTblClass::isSym(Tokens.at(index+1))) {//if its sym1 = sym2
-        symTblClass::setSym(Tokens.at(index-1),symTblClass::getVlaue(Tokens.at(index+1)));
-        // ^ puts sym1 <- sym2 ^
     }else{// if its sym = expression
         expression = ParserClass::get1Expression(index, Tokens);
         counter += expression.size();

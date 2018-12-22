@@ -19,11 +19,6 @@ using namespace std;
 
 
 class ParserClass {
-
-    static map<int,string> Precedence;
-    static map<string,string> Expressions;
-    static map<string,Command*> Commands;
-    static bool isOperator(const string &str);
     static bool isCommand(const string& str);
 public:
 

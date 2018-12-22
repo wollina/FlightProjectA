@@ -29,12 +29,7 @@ int loopCommand::execute(int index, vector<string> Tokens) {
     if(index == Tokens.size()-1 && Tokens.at(index) != "}")
         throw "did not close brackets }";
     counter++;
-    cout << endl << "in { }" << endl;
-    cout << "commands:" << endl;
-    for (auto s : commands){
-        cout << s << "|";
-    }
-    cout << endl;
+
     while(ConditionParser::CalculateCondition(condition)){
         ParserClass::Parser(commands);
     }

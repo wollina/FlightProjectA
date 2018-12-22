@@ -2,6 +2,7 @@
 // Created by eyal on 19/12/18.
 //
 
+#include <unistd.h>
 #include "sleepCommand.h"
 #include "ParserClass.h"
 
@@ -14,7 +15,8 @@ int sleepCommand::execute(int index, vector<string> Tokens) {
         cout << s << "|";
     }
     cout << endl;
-    //TODO: need to convert expression to double and do the sleep command
+    //TODO: need to convert expression to double and do the sleep command on this thread
+    sleep(1);
     return counter;
 }
 

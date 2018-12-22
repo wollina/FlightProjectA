@@ -91,7 +91,7 @@ bool TCPClient::send_data(string data)
         perror("Send failed : ");
         return false;
     }
-    cout<<"Data send\n";
+    cout<<"Data sent\n";
 
     return true;
 }

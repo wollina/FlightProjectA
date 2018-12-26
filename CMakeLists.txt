@@ -2,5 +2,6 @@ cmake_minimum_required(VERSION 3.13)
 project(FlightProjectA)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS -pthread)
 
-add_executable(FlightProjectA main.cpp cmake-build-debug/LexerClass.cpp cmake-build-debug/LexerClass.h cmake-build-debug/ParserClass.cpp cmake-build-debug/ParserClass.h cmake-build-debug/Command.h cmake-build-debug/DefineVarCommand.cpp cmake-build-debug/DefineVarCommand.h cmake-build-debug/symTblClass.cpp cmake-build-debug/symTblClass.h cmake-build-debug/ConditionParser.h cmake-build-debug/ConditionParser.cpp cmake-build-debug/ifCommand.cpp cmake-build-debug/ifCommand.h cmake-build-debug/loopCommand.cpp cmake-build-debug/loopCommand.h cmake-build-debug/assignmentCommand.cpp cmake-build-debug/assignmentCommand.h cmake-build-debug/printCommand.h cmake-build-debug/printCommand.cpp cmake-build-debug/OpenServerCommand.h cmake-build-debug/OpenServerCommand.cpp)
+add_executable(FlightProjectA main.cpp LexerClass.cpp LexerClass.h ParserClass.cpp ParserClass.h Command.h DefineVarCommand.cpp DefineVarCommand.h symTblClass.cpp symTblClass.h ConditionParser.h ConditionParser.cpp ifCommand.cpp ifCommand.h loopCommand.cpp loopCommand.h assignmentCommand.cpp assignmentCommand.h printCommand.h printCommand.cpp OpenServerCommand.h OpenServerCommand.cpp ConnectCommand.h ConnectCommand.cpp sleepCommand.h sleepCommand.cpp DataReaderServer.h DataReaderServer.cpp TCPClient.h TCPClient.cpp)
